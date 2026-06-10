@@ -92,7 +92,10 @@ body {
 		</style>
 		<link id="-gd-engine-icon" rel="icon" type="image/png" href="index.icon.png" />
 <link rel="apple-touch-icon" href="index.apple-touch-icon.png"/>
+<link rel="manifest" href="index.manifest.json">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+<style>#status-progress{accent-color:#8E3FC7;}#status-progress::-webkit-progress-value{background:#8E3FC7;}#status-progress::-moz-progress-bar{background:#8E3FC7;}</style>
+<script>document.addEventListener('keydown',function(event){if(event.key==='F11'){event.preventDefault();if(document.fullscreenElement){document.exitFullscreen?.();}else{document.documentElement.requestFullscreen?.();}}});</script>
 	</head>
 	<body>
 		<canvas id="canvas">
@@ -111,21 +114,9 @@ body {
 
 		<script src="index.js"></script>
 		<script>
-const GODOT_CONFIG = {"args":[],"canvasResizePolicy":2,"emscriptenPoolSize":8,"ensureCrossOriginIsolationHeaders":false,"executable":"index","experimentalVK":false,"fileSizes":{"index.pck":66365688,"index.wasm":37700666},"focusCanvas":true,"gdextensionLibs":[],"godotPoolSize":4};
+const GODOT_CONFIG = {"args":[],"canvasResizePolicy":2,"emscriptenPoolSize":8,"ensureCrossOriginIsolationHeaders":false,"executable":"index","experimentalVK":false,"fileSizes":{"index.pck":11432356,"index.wasm":37700666},"focusCanvas":true,"gdextensionLibs":[],"godotPoolSize":4,"serviceWorker":"index.service.worker.js"};
 const GODOT_THREADS_ENABLED = false;
 const engine = new Engine(GODOT_CONFIG);
-
-document.addEventListener('keydown', function (event) {
-	if (event.key !== 'F11') {
-		return;
-	}
-	event.preventDefault();
-	if (document.fullscreenElement) {
-		document.exitFullscreen?.();
-	} else {
-		document.documentElement.requestFullscreen?.();
-	}
-});
 
 (function () {
 	const statusOverlay = document.getElementById('status');
@@ -178,12 +169,7 @@ document.addEventListener('keydown', function (event) {
 		threads: GODOT_THREADS_ENABLED,
 	});
 
-	if (window.location.protocol === 'file:') {
-		displayFailureNotice(
-			'ARENA Web surumu dosyaya cift tiklanarak calistirilamaz.\n' +
-			'Bu klasordeki PLAY_ARENA.cmd dosyasini acin veya tum dosyalari bir web sunucusuna yukleyin.'
-		);
-	} else if (missing.length !== 0) {
+	if (missing.length !== 0) {
 		if (GODOT_CONFIG['serviceWorker'] && GODOT_CONFIG['ensureCrossOriginIsolationHeaders'] && 'serviceWorker' in navigator) {
 			let serviceWorkerRegistrationPromise;
 			try {
@@ -234,3 +220,4 @@ document.addEventListener('keydown', function (event) {
 		</script>
 	</body>
 </html>
+
